@@ -37,6 +37,7 @@
 	<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
 	<link href="assets/css/new.css" rel="stylesheet" type="text/css" id="wtf" />
+	<link rel="stylesheet" href="assets/css/buttons.css">
 
 </head>
 
@@ -403,10 +404,18 @@
 					<table class="table table-striped" id="agent-table">
 						<thead>
 							<tr>
-								<th scope="col" onclick="sortAlpha(0)">First</th>
-								<th scope="col" onclick="sortAlpha(1)">Last</th>
-								<th scope="col" onclick="sortNum(2)">Rating</th>
-								<th scope="col" onclick="sortNum(3)">Fee</th>
+								<th scope="col" onclick="sortAlpha(0)">
+									<button class="custom-btn btn-12"><span>Sort!</span><span>First</span></button>
+								</th>
+								<th scope="col" onclick="sortAlpha(1)">
+									<button class="custom-btn btn-12"><span>Sort!</span><span>Last</span></button>
+								</th>
+								<th scope="col" onclick="sortNum(2)">
+									<button class="custom-btn btn-12"><span>Sort!</span><span>Rating</span></button>
+								</th>
+								<th scope="col" onclick="sortNum(3)">
+									<button class="custom-btn btn-12"><span>Sort!</span><span>Fee</span></button>
+								</th>
 							</tr>
 						</thead>
 						<tbody id="agent-table-body">
