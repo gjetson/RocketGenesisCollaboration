@@ -51,3 +51,89 @@ const formatData = async () => {
 }
 
 formatData()
+
+const sortAlpha = (col) => {
+    sort(col, false)
+}
+
+const sortNum = (col) => {
+    sort(col, true)
+}
+
+const sort = (col, isNum) => {
+    let i = 0
+    let switchcount = 0
+    let shouldSwitch = false
+
+    const table = document.getElementById("agent-table")
+
+    // Set the sorting direction to ascending:
+    let dir = "asc"
+
+    /* Make a loop that will continue until
+    no switching has been done: */
+    let switching = true
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false
+        let rows = table.rows
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            let x = rows[i].getElementsByTagName("TD")[col]
+            let y = rows[i + 1].getElementsByTagName("TD")[col]
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir === "asc") {
+                if (isNum) {
+                    let fx = Number(x.innerHTML.replace(/[$,%]/g, ""))
+                    let fy = Number(y.innerHTML.replace(/[$,%]/g, ""))
+                    if (fx > fy) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true
+                        break
+                    }
+                }
+            } else {
+                if (isNum) {
+                    let fx = Number(x.innerHTML.replace(/[$,%]/g, ""))
+                    let fy = Number(y.innerHTML.replace(/[$,%]/g, ""))
+                    if (fx < fy) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true
+                        break
+                    }
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true
+            // Each time a switch is done, increase this count by 1:
+            switchcount++
+        } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir === "asc") {
+                dir = "desc"
+                switching = true
+            }
+        }
+    }
+}
