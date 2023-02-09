@@ -46,7 +46,7 @@ const formatData = async () => {
         const div = document.getElementById('agent-table-body')
         div.appendChild(frag)
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 }
 
